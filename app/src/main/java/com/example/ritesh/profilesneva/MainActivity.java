@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -112,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private ArrayList<ListData> resultProcessing(String response) throws JSONException{
+
             final String KEY = "data";
             final String PHOTO_URL = "image";
             final String NAME = "name";
@@ -123,13 +123,14 @@ public class MainActivity extends AppCompatActivity {
                 ListData listData = new ListData();
                 listData.setPersonName(temp.getString(NAME));
                 listData.setSkills(temp.getString(SKILLS));
-                Bitmap btmp = getBitmapFromURL(temp.getString(PHOTO_URL));
-                System.out.println("------------------->>"+btmp);
-                listData.setImgAddress(getCircularBitmap(btmp));
+                Bitmap bitmap = getBitmapFromURL(temp.getString(PHOTO_URL));
+                listData.setImgAddress(getCircularBitmap(bitmap));
                 arrayList.add(listData);
             }
             return arrayList;
         }
+
+
 
         @Override
         protected void onPostExecute(ArrayList<ListData> arrayList) {
